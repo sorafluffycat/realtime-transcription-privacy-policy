@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プライバシーポリシー - リアルタイム文字起こし / Privacy Policy - Real-time Transcription</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.8; color: #333; }
+    h1 { border-bottom: 2px solid #333; padding-bottom: 8px; }
+    h2 { margin-top: 2em; color: #1a1a2e; }
+    h3 { margin-top: 1.5em; }
+    .lang-section { margin-bottom: 3em; }
+    .updated { color: #666; font-size: 0.9em; }
+    hr { margin: 3em 0; }
+  </style>
+</head>
+<body>
+
+<div class="lang-section">
+<h1>プライバシーポリシー — リアルタイム文字起こし</h1>
+<p class="updated">最終更新日: 2026年2月18日</p>
+
+<h2>1. はじめに</h2>
+<p>「リアルタイム文字起こし」（以下「本拡張機能」）は、ブラウザタブの音声およびマイク音声をリアルタイムで文字起こしするChrome拡張機能です。本プライバシーポリシーは、本拡張機能がユーザーのデータをどのように取り扱うかを説明します。</p>
+
+<h2>2. 収集するデータ</h2>
+
+<h3>2.1 OpenAI APIキー</h3>
+<p>本拡張機能は、文字起こし機能を提供するために、ユーザーが入力したOpenAI APIキーを収集します。APIキーはブラウザのローカルストレージ内にAES-GCM方式で暗号化して保存されます。APIキーはOpenAIのRealtime Transcription APIへのWebSocket接続認証にのみ使用されます。</p>
+
+<h3>2.2 音声データ</h3>
+<p>本拡張機能は、ユーザーが明示的に文字起こしを開始した場合に限り、以下の音声データを取得します。</p>
+<ul>
+  <li>ユーザーが共有を許可したブラウザタブの音声（PC音声）</li>
+  <li>ユーザーが有効化した場合のマイク音声</li>
+</ul>
+<p>これらの音声データはOpenAIのRealtime Transcription APIにWebSocket（WSS）経由で直接送信されます。音声データは本拡張機能の開発者のサーバーには一切送信されません。音声データは拡張機能内に永続的に保存されません。</p>
+
+<h3>2.3 文字起こし結果</h3>
+<p>OpenAI APIから返された文字起こしテキストは、ブラウザのローカルストレージ（chrome.storage.local）に保存されます。このデータはユーザーの端末内にのみ存在し、外部には送信されません。</p>
+
+<h3>2.4 設定データ</h3>
+<p>言語設定、文字起こしモデル、区切り方、文字サイズ、マイク使用の有無などのユーザー設定は、ブラウザのローカルストレージに保存されます。</p>
+
+<h2>3. 収集しないデータ</h2>
+<p>本拡張機能は以下のデータを一切収集しません。</p>
+<ul>
+  <li>個人を特定できる情報（氏名、メールアドレス、住所など）</li>
+  <li>ウェブ閲覧履歴、アクセスしたURL</li>
+  <li>ウェブページのコンテンツ</li>
+  <li>Cookie、位置情報、財務情報</li>
+  <li>匿名の使用統計やアナリティクスデータ</li>
+</ul>
+
+<h2>4. データの使用目的</h2>
+<p>収集したデータは以下の目的にのみ使用されます。</p>
+<ul>
+  <li>OpenAI APIキー: OpenAI Realtime Transcription APIへの接続認証</li>
+  <li>音声データ: OpenAI APIによるリアルタイム文字起こし処理</li>
+  <li>文字起こし結果: ユーザーへの表示、コピー、エクスポート機能の提供</li>
+  <li>設定データ: ユーザーの設定の保持・復元</li>
+</ul>
+
+<h2>5. データの共有・第三者への提供</h2>
+<p>音声データはOpenAI, Inc.のAPIに直接送信されます。OpenAIによるデータの取り扱いについては、<a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAIのプライバシーポリシー</a>をご確認ください。</p>
+<p>上記を除き、本拡張機能の開発者はユーザーのデータを第三者に共有、販売、転送することは一切ありません。</p>
+
+<h2>6. データの保存とセキュリティ</h2>
+<ul>
+  <li>OpenAI APIキーはAES-GCM（256ビット）で暗号化してブラウザのローカルストレージに保存されます。</li>
+  <li>音声データはWebSocket Secure（WSS）で暗号化して送信されます。</li>
+  <li>文字起こし結果および設定データはブラウザのローカルストレージにのみ保存され、外部送信されません。</li>
+  <li>すべてのデータはユーザーの端末内にのみ存在します。</li>
+</ul>
+
+<h2>7. データの削除</h2>
+<p>ユーザーはいつでも以下の方法でデータを削除できます。</p>
+<ul>
+  <li>拡張機能内の「クリア」ボタンで文字起こし履歴を削除</li>
+  <li>設定画面でAPIキーを削除</li>
+  <li>拡張機能をアンインストールすることで、すべてのデータが削除されます</li>
+</ul>
+
+<h2>8. Chrome Web Store Limited Use Policy への準拠</h2>
+<p>本拡張機能は、Chrome Web Store User Data Policyおよび Limited Use Requirements に準拠しています。取得したユーザーデータは、本拡張機能の単一の目的（リアルタイム文字起こし）を提供・改善するためにのみ使用されます。ユーザーデータを広告目的で使用すること、第三者に販売すること、信用力の判定に使用することはありません。</p>
+
+<h2>9. 子どものプライバシー</h2>
+<p>本拡張機能は13歳未満の子どもを対象としたものではなく、13歳未満の子どもから意図的に個人情報を収集することはありません。</p>
+
+<h2>10. 本ポリシーの変更</h2>
+<p>本プライバシーポリシーは必要に応じて更新されることがあります。重要な変更がある場合は、本ページの最終更新日を更新します。</p>
+
+<h2>11. お問い合わせ</h2>
+<p>本プライバシーポリシーに関するご質問は、Chrome Web Storeの拡張機能サポートページよりお問い合わせください。</p>
+</div>
+
+<hr>
+
+<div class="lang-section">
+<h1>Privacy Policy — Real-time Transcription</h1>
+<p class="updated">Last updated: February 18, 2026</p>
+
+<h2>1. Introduction</h2>
+<p>"Real-time Transcription" (hereinafter "this extension") is a Chrome extension that transcribes audio from browser tabs and microphone input in real time. This Privacy Policy explains how this extension handles user data.</p>
+
+<h2>2. Data We Collect</h2>
+
+<h3>2.1 OpenAI API Key</h3>
+<p>This extension collects the OpenAI API key entered by the user to provide transcription functionality. The API key is encrypted using AES-GCM and stored in the browser's local storage. The API key is used solely for authenticating WebSocket connections to the OpenAI Realtime Transcription API.</p>
+
+<h3>2.2 Audio Data</h3>
+<p>This extension captures the following audio data only when the user explicitly initiates transcription:</p>
+<ul>
+  <li>Audio from the browser tab that the user has authorized for sharing (PC audio)</li>
+  <li>Microphone audio, if enabled by the user</li>
+</ul>
+<p>Audio data is sent directly to the OpenAI Realtime Transcription API via WebSocket Secure (WSS). Audio data is never sent to the extension developer's servers. Audio data is not persistently stored within the extension.</p>
+
+<h3>2.3 Transcription Results</h3>
+<p>Transcription text returned from the OpenAI API is stored in the browser's local storage (chrome.storage.local). This data exists only on the user's device and is not transmitted externally.</p>
+
+<h3>2.4 Settings Data</h3>
+<p>User preferences such as language, transcription model, segmentation mode, font size, and microphone usage are stored in the browser's local storage.</p>
+
+<h2>3. Data We Do Not Collect</h2>
+<p>This extension does not collect any of the following:</p>
+<ul>
+  <li>Personally identifiable information (name, email address, physical address, etc.)</li>
+  <li>Web browsing history or visited URLs</li>
+  <li>Web page content</li>
+  <li>Cookies, location data, or financial information</li>
+  <li>Anonymous usage statistics or analytics data</li>
+</ul>
+
+<h2>4. How We Use Data</h2>
+<p>Collected data is used solely for the following purposes:</p>
+<ul>
+  <li>OpenAI API Key: Authentication for connecting to the OpenAI Realtime Transcription API</li>
+  <li>Audio Data: Real-time transcription processing via the OpenAI API</li>
+  <li>Transcription Results: Display, copy, and export functionality for users</li>
+  <li>Settings Data: Persisting and restoring user preferences</li>
+</ul>
+
+<h2>5. Data Sharing and Third-Party Disclosure</h2>
+<p>Audio data is sent directly to OpenAI, Inc.'s API. For information on how OpenAI handles data, please refer to <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI's Privacy Policy</a>.</p>
+<p>Other than the above, the extension developer does not share, sell, or transfer user data to any third parties.</p>
+
+<h2>6. Data Storage and Security</h2>
+<ul>
+  <li>The OpenAI API key is encrypted with AES-GCM (256-bit) and stored in the browser's local storage.</li>
+  <li>Audio data is transmitted using WebSocket Secure (WSS) encryption.</li>
+  <li>Transcription results and settings are stored only in the browser's local storage and are not transmitted externally.</li>
+  <li>All data resides solely on the user's device.</li>
+</ul>
+
+<h2>7. Data Deletion</h2>
+<p>Users can delete their data at any time through the following methods:</p>
+<ul>
+  <li>Use the "Clear" button within the extension to delete transcription history</li>
+  <li>Remove the API key from the settings</li>
+  <li>Uninstall the extension to delete all data</li>
+</ul>
+
+<h2>8. Compliance with Chrome Web Store Limited Use Policy</h2>
+<p>This extension complies with the Chrome Web Store User Data Policy and Limited Use Requirements. User data obtained is used solely to provide and improve the single purpose of this extension (real-time transcription). User data is not used for advertising purposes, sold to third parties, or used for creditworthiness determinations.</p>
+
+<h2>9. Children's Privacy</h2>
+<p>This extension is not intended for children under the age of 13, and we do not knowingly collect personal information from children under 13.</p>
+
+<h2>10. Changes to This Policy</h2>
+<p>This Privacy Policy may be updated as necessary. If significant changes are made, the "Last updated" date at the top of this page will be revised.</p>
+
+<h2>11. Contact</h2>
+<p>For questions about this Privacy Policy, please use the support page on the Chrome Web Store extension listing.</p>
+</div>
+
+</body>
+</html>
