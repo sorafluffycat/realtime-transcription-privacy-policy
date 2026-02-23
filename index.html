@@ -18,30 +18,36 @@
 
 <div class="lang-section">
 <h1>プライバシーポリシー — リアルタイム文字起こし</h1>
-<p class="updated">最終更新日: 2026年2月22日</p>
+<p class="updated">最終更新日: 2026年2月23日</p>
 
 <h2>1. はじめに</h2>
-<p>「リアルタイム文字起こし」（以下「本拡張機能」）は、ブラウザタブの音声およびマイク音声をリアルタイムで文字起こしするChrome拡張機能です。サイドパネルおよびポップアップウィンドウで文字起こし結果を表示し、テキストの検索・コピー・エクスポート、およびオンデバイス翻訳機能を提供します。本プライバシーポリシーは、本拡張機能がユーザーのデータをどのように取り扱うかを説明します。</p>
+<p>「リアルタイム文字起こし」（以下「本拡張機能」）は、ブラウザタブの音声およびマイク音声をリアルタイムで文字起こしするChrome拡張機能です。サイドパネルおよびポップアップウィンドウで文字起こし結果を表示し、テキストの検索・コピー・エクスポート、オンデバイス翻訳機能、および音声録音・画面録画機能を提供します。本プライバシーポリシーは、本拡張機能がユーザーのデータをどのように取り扱うかを説明します。</p>
 
 <h2>2. 収集するデータ</h2>
 
 <h3>2.1 OpenAI APIキー</h3>
 <p>本拡張機能は、文字起こし機能を提供するために、ユーザーまたは管理者が提供するOpenAI APIキーを使用します。APIキーは、ユーザーが直接入力するAPIキー（sk-形式）と、管理者が配布するアプリ専用キー（skt-形式）の2種類に対応しています。いずれの形式もブラウザのローカルストレージ内にAES-GCM方式で暗号化して保存されます。アプリ専用キーは拡張機能内で復号され、元のAPIキーとしてOpenAIのAPIへの接続認証にのみ使用されます。</p>
 
-<h3>2.2 音声データ</h3>
+<h3>2.2 音声・映像データ</h3>
 <p>本拡張機能は、ユーザーが明示的に文字起こしを開始した場合に限り、以下の音声データを取得します。</p>
 <ul>
   <li>ユーザーが共有を許可したブラウザタブの音声（PC音声）</li>
   <li>ユーザーが有効化した場合のマイク音声</li>
 </ul>
 <p>これらの音声データはOpenAIのRealtime Transcription APIにWebSocket（WSS）経由で直接送信されます。音声データは本拡張機能の開発者のサーバーには一切送信されません。</p>
-<p>また、ユーザーが「音声を録音する」オプションを有効にした場合、PC音声およびマイク音声を含む録音ファイル（WebM形式）がユーザーの端末にローカル保存されます。録音ファイルは文字起こし停止時に自動的にダウンロードされ、ユーザーの端末内にのみ存在します。録音ファイルが外部に送信されることはありません。</p>
+<p>また、ユーザーが録音・録画オプションを有効にした場合、以下のファイル（WebM形式）がユーザーの端末にローカル保存されます。</p>
+<ul>
+  <li><strong>音声のみモード:</strong> PC音声およびマイク音声を含む音声録音ファイル</li>
+  <li><strong>音声＋画面モード:</strong> 画面共有で取得した映像とPC音声・マイク音声を含む画面録画ファイル</li>
+</ul>
+<p>映像データ（画面共有の映像トラック）は、ユーザーが「音声＋画面」録画モードを選択した場合にのみ保持されます。映像データは録画ファイルのローカル保存にのみ使用され、OpenAI APIを含む外部サーバーには一切送信されません。「音声のみ」モードの場合、映像トラックは取得後直ちに破棄されます。</p>
+<p>録音・録画ファイルは文字起こし停止時に自動的にダウンロードされ、ユーザーの端末内にのみ存在します。これらのファイルが外部に送信されることはありません。</p>
 
 <h3>2.3 文字起こし結果</h3>
 <p>OpenAI APIから返された文字起こしテキストは、ブラウザのローカルストレージ（chrome.storage.local）に保存されます。このデータはユーザーの端末内にのみ存在し、外部には送信されません。</p>
 
 <h3>2.4 設定データ</h3>
-<p>言語設定、文字起こしモデル、区切り方、文字サイズ、フォント、テーマ、マイク使用の有無、マイクノイズリダクション設定などのユーザー設定は、ブラウザのローカルストレージに保存されます。</p>
+<p>言語設定、文字起こしモデル、区切り方、文字サイズ、フォント、テーマ、マイク使用の有無、マイクノイズリダクション設定、録画モードなどのユーザー設定は、ブラウザのローカルストレージに保存されます。</p>
 <p>ユーザーが入力した「用語ヒント（プロンプト）」は、文字起こしの精度向上を目的としてOpenAI APIのセッション設定の一部として送信されます。</p>
 <p>拡張機能の内部動作に必要な一時的な状態情報（マイクタブの識別子、ポップアップウィンドウの状態など）は、ブラウザのセッションストレージに保存され、ブラウザを閉じると自動的に削除されます。</p>
 
@@ -64,7 +70,8 @@
 <ul>
   <li>OpenAI APIキー: OpenAI Realtime Transcription APIへの接続認証</li>
   <li>音声データ: OpenAI APIによるリアルタイム文字起こし処理</li>
-  <li>録音ファイル: ユーザーが有効にした場合の音声記録のローカル保存</li>
+  <li>録音・録画ファイル: ユーザーが有効にした場合の音声記録または画面録画のローカル保存</li>
+  <li>映像データ: ユーザーが「音声＋画面」録画モードを選択した場合の画面録画ファイルへの記録（外部送信なし）</li>
   <li>文字起こし結果: ユーザーへの表示、検索、コピー、エクスポート機能の提供</li>
   <li>用語ヒント: OpenAI APIでの文字起こし精度の向上</li>
   <li>設定データ: ユーザーの設定の保持・復元</li>
@@ -73,6 +80,7 @@
 
 <h2>5. データの共有・第三者への提供</h2>
 <p>音声データおよびユーザーが設定した用語ヒントは、OpenAI, Inc.のAPIに直接送信されます。OpenAIによるデータの取り扱いについては、<a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAIのプライバシーポリシー</a>をご確認ください。</p>
+<p>映像データ（画面録画の映像トラック）はOpenAI APIを含む外部サーバーには送信されず、ユーザーの端末内でのローカル録画にのみ使用されます。</p>
 <p>上記を除き、本拡張機能の開発者はユーザーのデータを第三者に共有、販売、転送することは一切ありません。</p>
 
 <h2>6. データの保存とセキュリティ</h2>
@@ -81,7 +89,8 @@
   <li>アプリ専用キー（skt-形式）は、拡張機能内でAES-GCMにより復号され、復号後のAPIキーはメモリ上でのみ使用され永続的に平文で保存されることはありません。</li>
   <li>音声データはWebSocket Secure（WSS）で暗号化して送信されます。</li>
   <li>文字起こし結果および設定データはブラウザのローカルストレージにのみ保存され、外部送信されません。</li>
-  <li>録音ファイルはユーザーの端末にのみ保存され、外部に送信されません。</li>
+  <li>録音・録画ファイルはユーザーの端末にのみ保存され、外部に送信されません。</li>
+  <li>映像データは録画ファイル内にのみ含まれ、外部に送信されません。</li>
   <li>すべてのデータはユーザーの端末内にのみ存在します。</li>
 </ul>
 
@@ -90,8 +99,8 @@
 <ul>
   <li>拡張機能内の「クリア」ボタンで文字起こし履歴を削除</li>
   <li>設定画面でAPIキーを削除</li>
-  <li>録音ファイルはユーザーの端末に保存されるため、通常のファイル操作で削除できます</li>
-  <li>拡張機能をアンインストールすることで、拡張機能が保存したすべてのデータが削除されます（端末にダウンロードされた録音ファイルを除く）</li>
+  <li>録音・録画ファイルはユーザーの端末に保存されるため、通常のファイル操作で削除できます</li>
+  <li>拡張機能をアンインストールすることで、拡張機能が保存したすべてのデータが削除されます（端末にダウンロードされた録音・録画ファイルを除く）</li>
 </ul>
 
 <h2>8. Chrome Web Store Limited Use Policy への準拠</h2>
@@ -111,30 +120,36 @@
 
 <div class="lang-section">
 <h1>Privacy Policy — Real-time Transcription</h1>
-<p class="updated">Last updated: February 22, 2026</p>
+<p class="updated">Last updated: February 23, 2026</p>
 
 <h2>1. Introduction</h2>
-<p>"Real-time Transcription" (hereinafter "this extension") is a Chrome extension that transcribes audio from browser tabs and microphone input in real time. It displays transcription results in a side panel and a popup window, and provides text search, copy, export, and on-device translation features. This Privacy Policy explains how this extension handles user data.</p>
+<p>"Real-time Transcription" (hereinafter "this extension") is a Chrome extension that transcribes audio from browser tabs and microphone input in real time. It displays transcription results in a side panel and a popup window, and provides text search, copy, export, on-device translation, and audio recording/screen recording features. This Privacy Policy explains how this extension handles user data.</p>
 
 <h2>2. Data We Collect</h2>
 
 <h3>2.1 OpenAI API Key</h3>
 <p>This extension uses an OpenAI API key provided by the user or an administrator to deliver transcription functionality. Two key formats are supported: standard API keys entered directly by the user (sk- format) and app-bound keys distributed by an administrator (skt- format). Both formats are encrypted using AES-GCM and stored in the browser's local storage. App-bound keys are decrypted within the extension and used solely for authenticating connections to the OpenAI API.</p>
 
-<h3>2.2 Audio Data</h3>
+<h3>2.2 Audio and Video Data</h3>
 <p>This extension captures the following audio data only when the user explicitly initiates transcription:</p>
 <ul>
   <li>Audio from the browser tab that the user has authorized for sharing (PC audio)</li>
   <li>Microphone audio, if enabled by the user</li>
 </ul>
 <p>Audio data is sent directly to the OpenAI Realtime Transcription API via WebSocket Secure (WSS). Audio data is never sent to the extension developer's servers.</p>
-<p>Additionally, if the user enables the "Record audio" option, a recording file (WebM format) containing PC audio and microphone audio is saved locally on the user's device. The recording file is automatically downloaded when transcription stops and exists only on the user's device. Recording files are never transmitted externally.</p>
+<p>Additionally, if the user enables the recording option, the following files (WebM format) are saved locally on the user's device:</p>
+<ul>
+  <li><strong>Audio-only mode:</strong> An audio recording file containing PC audio and microphone audio</li>
+  <li><strong>Audio + Screen mode:</strong> A screen recording file containing video from screen sharing along with PC audio and microphone audio</li>
+</ul>
+<p>Video data (the video track from screen sharing) is retained only when the user selects the "Audio + Screen" recording mode. Video data is used solely for local recording file storage and is never sent to any external server, including the OpenAI API. In "Audio-only" mode, the video track is discarded immediately after capture.</p>
+<p>Recording files are automatically downloaded when transcription stops and exist only on the user's device. These files are never transmitted externally.</p>
 
 <h3>2.3 Transcription Results</h3>
 <p>Transcription text returned from the OpenAI API is stored in the browser's local storage (chrome.storage.local). This data exists only on the user's device and is not transmitted externally.</p>
 
 <h3>2.4 Settings Data</h3>
-<p>User preferences such as language, transcription model, segmentation mode, font size, font family, theme, microphone usage, and microphone noise reduction settings are stored in the browser's local storage.</p>
+<p>User preferences such as language, transcription model, segmentation mode, font size, font family, theme, microphone usage, microphone noise reduction settings, and recording mode are stored in the browser's local storage.</p>
 <p>The "terminology hints (prompt)" entered by the user are sent to the OpenAI API as part of the session configuration to improve transcription accuracy.</p>
 <p>Temporary state information required for the extension's internal operation (such as microphone tab identifiers and popup window state) is stored in the browser's session storage and is automatically deleted when the browser is closed.</p>
 
@@ -157,7 +172,8 @@
 <ul>
   <li>OpenAI API Key: Authentication for connecting to the OpenAI Realtime Transcription API</li>
   <li>Audio Data: Real-time transcription processing via the OpenAI API</li>
-  <li>Recording Files: Local storage of audio recordings when enabled by the user</li>
+  <li>Recording Files: Local storage of audio recordings or screen recordings when enabled by the user</li>
+  <li>Video Data: Recording to screen recording files when the user selects "Audio + Screen" mode (never transmitted externally)</li>
   <li>Transcription Results: Display, search, copy, and export functionality for users</li>
   <li>Terminology Hints: Improving transcription accuracy via the OpenAI API</li>
   <li>Settings Data: Persisting and restoring user preferences</li>
@@ -166,6 +182,7 @@
 
 <h2>5. Data Sharing and Third-Party Disclosure</h2>
 <p>Audio data and user-configured terminology hints are sent directly to OpenAI, Inc.'s API. For information on how OpenAI handles data, please refer to <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI's Privacy Policy</a>.</p>
+<p>Video data (the video track from screen recording) is never sent to any external server, including the OpenAI API, and is used solely for local recording on the user's device.</p>
 <p>Other than the above, the extension developer does not share, sell, or transfer user data to any third parties.</p>
 
 <h2>6. Data Storage and Security</h2>
@@ -174,7 +191,8 @@
   <li>App-bound keys (skt- format) are decrypted via AES-GCM within the extension; the decrypted API key is used only in memory and is never persistently stored in plaintext.</li>
   <li>Audio data is transmitted using WebSocket Secure (WSS) encryption.</li>
   <li>Transcription results and settings are stored only in the browser's local storage and are not transmitted externally.</li>
-  <li>Recording files are stored only on the user's device and are never transmitted externally.</li>
+  <li>Recording files (audio recordings and screen recordings) are stored only on the user's device and are never transmitted externally.</li>
+  <li>Video data is contained only within recording files and is never transmitted externally.</li>
   <li>All data resides solely on the user's device.</li>
 </ul>
 
@@ -183,7 +201,7 @@
 <ul>
   <li>Use the "Clear" button within the extension to delete transcription history</li>
   <li>Remove the API key from the settings</li>
-  <li>Recording files are saved on the user's device and can be deleted through standard file management</li>
+  <li>Recording files (audio recordings and screen recordings) are saved on the user's device and can be deleted through standard file management</li>
   <li>Uninstalling the extension deletes all data stored by the extension (excluding recording files already downloaded to the device)</li>
 </ul>
 
