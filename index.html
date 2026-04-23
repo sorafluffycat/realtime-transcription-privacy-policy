@@ -18,15 +18,15 @@
 
 <div class="lang-section">
 <h1>プライバシーポリシー — 文字起こしツール</h1>
-<p class="updated">最終更新日: 2026年4月21日</p>
+<p class="updated">最終更新日: 2026年4月23日</p>
 
 <h2>1. はじめに</h2>
-<p>「文字起こしツール」（以下「本拡張機能」）は、ブラウザタブの音声およびマイク音声をライブで文字起こしするChrome拡張機能です。また、保存済みの音声・動画ファイルからの文字起こしにも対応しています。サイドパネルおよびポップアップウィンドウで文字起こし結果を表示し、テキストの検索・コピー・エクスポート、オンデバイス翻訳機能、音声録音・画面録画機能、およびGoogleドキュメントへの自動書き込み機能を提供します。本プライバシーポリシーは、本拡張機能がユーザーのデータをどのように取り扱うかを説明します。</p>
+<p>「文字起こしツール」（以下「本拡張機能」）は、ブラウザタブの音声およびマイク音声をライブで文字起こしするChrome拡張機能です。また、保存済みの音声・動画ファイルからの文字起こしにも対応しています。文字起こしエンジンは2種類から選択できます。☁️ OpenAIのAPIによる高精度な文字起こし（APIモード）と、🖥️ Chrome内蔵の音声認識によるブラウザ内ローカル処理（オンデバイスモード・APIキー不要）に対応しています。サイドパネルおよびポップアップウィンドウで文字起こし結果を表示し、テキストの検索・コピー・エクスポート、オンデバイス翻訳機能、音声録音・画面録画機能、およびGoogleドキュメントへの自動書き込み機能を提供します。本プライバシーポリシーは、本拡張機能がユーザーのデータをどのように取り扱うかを説明します。</p>
 
 <h2>2. 収集するデータ</h2>
 
 <h3>2.1 OpenAI APIキー</h3>
-<p>本拡張機能は、文字起こし機能を提供するために、ユーザーまたは管理者が提供するOpenAI APIキーを使用します。APIキーは以下の方法で取得・保存されます。</p>
+<p>本拡張機能は、☁️ APIモードでの文字起こし機能を提供するために、ユーザーまたは管理者が提供するOpenAI APIキーを使用します。🖥️ オンデバイスモードではAPIキーは不要であり、取得・保存されません。APIキーは以下の方法で取得・保存されます。</p>
 <ul>
   <li><strong>ユーザーが直接入力するAPIキー（sk-形式）:</strong> ユーザーが設定画面で入力します。</li>
   <li><strong>管理者が配布するアプリ専用キー（skt-形式）:</strong> 管理者がGoogle Admin Consoleのmanaged policyを通じて配布します。</li>
@@ -40,8 +40,9 @@
   <li>ユーザーが共有を許可したブラウザタブの音声（PC音声）</li>
   <li>ユーザーが有効化した場合のマイク音声</li>
 </ul>
-<p>ライブ文字起こしの場合、これらの音声データはOpenAIのRealtime Transcription APIにWebSocket（WSS）経由で直接送信されます。音声データは本拡張機能の開発者のサーバーには一切送信されません。</p>
-<p>ファイル文字起こしの場合、ユーザーが選択した音声・動画ファイルはブラウザ内でデコード・分割された後、OpenAIのWhisper APIにHTTPS経由で送信されます。ファイルデータは本拡張機能の開発者のサーバーには一切送信されません。元のファイルが変更されることはありません。</p>
+<p><strong>☁️ APIモード（ライブ文字起こし）の場合:</strong> これらの音声データはOpenAIのRealtime Transcription APIにWebSocket（WSS）経由で直接送信されます。音声データは本拡張機能の開発者のサーバーには一切送信されません。</p>
+<p><strong>🖥️ オンデバイスモードの場合:</strong> 音声データはブラウザ内のChrome内蔵音声認識エンジンによってローカルで処理されます。音声データはOpenAI APIを含む外部サーバーには一切送信されません。</p>
+<p><strong>ファイル文字起こしの場合:</strong> ユーザーが選択した音声・動画ファイルはブラウザ内でデコード・分割された後、OpenAIのWhisper APIにHTTPS経由で送信されます。ファイルデータは本拡張機能の開発者のサーバーには一切送信されません。元のファイルが変更されることはありません。</p>
 <p>また、ユーザーが録音・録画オプションを有効にした場合、以下のファイル（WebM形式）がユーザーの端末にローカル保存されます。</p>
 <ul>
   <li><strong>音声のみモード:</strong> PC音声およびマイク音声を含む音声録音ファイル</li>
@@ -51,11 +52,11 @@
 <p>録音・録画ファイルは文字起こし停止時に自動的にダウンロードされ、ユーザーの端末内にのみ存在します。これらのファイルが外部に送信されることはありません。</p>
 
 <h3>2.3 文字起こし結果</h3>
-<p>OpenAI APIから返された文字起こしテキストは、ブラウザのローカルストレージ（chrome.storage.local）に保存されます。このデータはユーザーの端末内にのみ存在し、外部には送信されません（ユーザーがGoogleドキュメント連携を有効にしている場合を除く。詳細は2.7項を参照）。</p>
+<p>☁️ APIモードではOpenAI APIから返された文字起こしテキスト、🖥️ オンデバイスモードではChrome内蔵音声認識エンジンが生成した文字起こしテキストが、ブラウザのローカルストレージ（chrome.storage.local）に保存されます。このデータはユーザーの端末内にのみ存在し、外部には送信されません（ユーザーがGoogleドキュメント連携を有効にしている場合を除く。詳細は2.7項を参照）。</p>
 
 <h3>2.4 設定データ</h3>
-<p>言語設定、文字起こしモデル、区切り方、文字サイズ、フォント、テーマ、マイク使用の有無、マイクノイズリダクション設定、録画モード、Googleドキュメント連携設定などのユーザー設定は、ブラウザのローカルストレージに保存されます。</p>
-<p>ユーザーが入力した「用語ヒント（プロンプト）」は、文字起こしの精度向上を目的としてOpenAI APIのセッション設定の一部として送信されます。</p>
+<p>文字起こしエンジンの選択、言語設定、文字起こしモデル、区切り方、文字サイズ、フォント、テーマ、マイク使用の有無、マイクノイズリダクション設定、録画モード、Googleドキュメント連携設定などのユーザー設定は、ブラウザのローカルストレージに保存されます。</p>
+<p>ユーザーが入力した「用語ヒント（プロンプト）」は、☁️ APIモードでの文字起こしの精度向上を目的としてOpenAI APIのセッション設定の一部として送信されます。🖥️ オンデバイスモードでは用語ヒントは使用されず、外部に送信されません。</p>
 <p>拡張機能の内部動作に必要な一時的な状態情報（マイクタブの識別子、ポップアップウィンドウの状態など）は、ブラウザのセッションストレージに保存され、ブラウザを閉じると自動的に削除されます。</p>
 
 <h3>2.5 翻訳データ</h3>
@@ -95,6 +96,7 @@
   <li>Cookie、位置情報、財務情報</li>
   <li>匿名の使用統計やアナリティクスデータ</li>
   <li>翻訳処理に伴う外部へのテキスト送信（翻訳はすべて端末内で完結します）</li>
+  <li>🖥️ オンデバイスモード使用時の音声データの外部送信（音声認識はすべてブラウザ内で完結します）</li>
   <li>Googleアカウントのパスワードやその他の認証情報（認証はGoogleのOAuth 2.0フローで処理され、本拡張機能はパスワードにアクセスしません）</li>
   <li>リモートAPIキー配信の通信において、メールアドレス以外のユーザーデータ（閲覧データ、音声データ、文字起こし結果など）</li>
 </ul>
@@ -102,12 +104,13 @@
 <h2>4. データの使用目的</h2>
 <p>収集したデータは以下の目的にのみ使用されます。</p>
 <ul>
-  <li>OpenAI APIキー: OpenAI Realtime Transcription APIおよびWhisper APIへの接続認証</li>
-  <li>音声データ: OpenAI APIによるライブ文字起こし処理、およびWhisper APIによるファイル文字起こし処理</li>
+  <li>OpenAI APIキー: ☁️ APIモードにおけるOpenAI Realtime Transcription APIおよびWhisper APIへの接続認証</li>
+  <li>音声データ（☁️ APIモード）: OpenAI APIによるライブ文字起こし処理、およびWhisper APIによるファイル文字起こし処理</li>
+  <li>音声データ（🖥️ オンデバイスモード）: Chrome内蔵音声認識エンジンによるブラウザ内ローカル文字起こし処理（外部送信なし）</li>
   <li>録音・録画ファイル: ユーザーが有効にした場合の音声記録または画面録画のローカル保存</li>
   <li>映像データ: ユーザーが「音声＋画面」録画モードを選択した場合の画面録画ファイルへの記録（外部送信なし）</li>
   <li>文字起こし結果: ユーザーへの表示、検索、コピー、エクスポート機能の提供、およびGoogleドキュメントへの書き込み（有効時のみ）</li>
-  <li>用語ヒント: OpenAI APIでの文字起こし精度の向上</li>
+  <li>用語ヒント: ☁️ APIモードでのOpenAI APIでの文字起こし精度の向上</li>
   <li>設定データ: ユーザーの設定の保持・復元</li>
   <li>翻訳データ: 文字起こし結果のオンデバイス翻訳表示、およびGoogleドキュメントへの書き込み（有効時のみ）</li>
   <li>Googleアカウント情報: Google Docs APIへのリクエスト認証およびログイン状態の表示</li>
@@ -116,7 +119,8 @@
 </ul>
 
 <h2>5. データの共有・第三者への提供</h2>
-<p>音声データ（ライブ文字起こし時のストリーミング音声およびファイル文字起こし時の音声チャンク）、ならびにユーザーが設定した用語ヒントは、OpenAI, Inc.のAPIに直接送信されます。OpenAIによるデータの取り扱いについては、<a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAIのプライバシーポリシー</a>をご確認ください。</p>
+<p><strong>☁️ APIモード:</strong> 音声データ（ライブ文字起こし時のストリーミング音声およびファイル文字起こし時の音声チャンク）、ならびにユーザーが設定した用語ヒントは、OpenAI, Inc.のAPIに直接送信されます。OpenAIによるデータの取り扱いについては、<a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAIのプライバシーポリシー</a>をご確認ください。</p>
+<p><strong>🖥️ オンデバイスモード:</strong> 音声データはブラウザ内でローカル処理され、OpenAI APIを含む外部サーバーには一切送信されません。</p>
 <p>映像データ（画面録画の映像トラック）はOpenAI APIを含む外部サーバーには送信されず、ユーザーの端末内でのローカル録画にのみ使用されます。</p>
 <p>Googleドキュメント連携を有効にした場合、文字起こし結果のテキストがGoogle Docs APIを通じてGoogle, LLC（Alphabet Inc.）のサーバーに送信されます。Googleによるデータの取り扱いについては、<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleのプライバシーポリシー</a>をご確認ください。Googleに送信されるのはテキストデータのみであり、音声データ、映像データ、録音・録画ファイルがGoogleに送信されることはありません。</p>
 <p>リモートAPIキー配信機能において、拡張機能はGoogle Apps Scriptのホスティング基盤（script.google.com）にHTTP GETリクエストを送信します。このリクエストには、組織管理者が利用状況を把握するためにChromeプロファイルのメールアドレスがクエリパラメータとして含まれます。メールアドレスはGAS Webアプリ（組織管理者が管理するスプレッドシート）でのアクセスログ記録にのみ使用され、本拡張機能の開発者には送信されません。メールアドレス以外のユーザーデータは一切含まれません。GAS Webアプリから受信するのはAPIキー文字列のみです。</p>
@@ -127,8 +131,9 @@
   <li>OpenAI APIキーはAES-GCM（256ビット）で暗号化してブラウザのローカルストレージに保存されます。リモート配信で取得したAPIキーも同様に暗号化してキャッシュされます。</li>
   <li>アプリ専用キー（skt-形式）は、拡張機能内でAES-GCMにより復号され、復号後のAPIキーはメモリ上でのみ使用され永続的に平文で保存されることはありません。</li>
   <li>Google OAuth認証トークンはAES-GCM（256ビット）で暗号化してブラウザのローカルストレージに保存されます。</li>
-  <li>ライブ文字起こしの音声データはWebSocket Secure（WSS）で暗号化して送信されます。</li>
+  <li>☁️ APIモードにおけるライブ文字起こしの音声データはWebSocket Secure（WSS）で暗号化して送信されます。</li>
   <li>ファイル文字起こしの音声データはHTTPS（TLS）で暗号化して送信されます。</li>
+  <li>🖥️ オンデバイスモードでは音声データはブラウザ内でローカル処理され、外部に送信されません。</li>
   <li>Google Docs APIへの通信はHTTPS（TLS）で暗号化されます。</li>
   <li>GAS Webアプリへの通信はHTTPS（TLS）で暗号化されます。</li>
   <li>文字起こし結果および設定データはブラウザのローカルストレージにのみ保存され、外部送信されません（Googleドキュメント連携が有効な場合を除く）。</li>
@@ -138,7 +143,7 @@
 </ul>
 
 <h2>7. リモートコードの不使用</h2>
-<p>本拡張機能はManifest V3に準拠しており、外部サーバーから実行可能なコードをダウンロード・実行することは一切ありません。すべてのプログラムロジックは拡張機能パッケージ内に含まれています。GAS Webアプリを含む外部サーバーから取得するのはデータ（APIキー文字列、API応答テキスト等）のみであり、eval()やその他の動的コード実行メカニズムは使用していません。</p>
+<p>本拡張機能はManifest V3に準拠しており、外部サーバーから実行可能なコードをダウンロード・実行することは一切ありません。すべてのプログラムロジックは拡張機能パッケージ内に含まれています。GAS Webアプリを含む外部サーバーから取得するのはデータ（APIキー文字列、API応答テキスト等）のみであり、eval()やその他の動的コード実行メカニズムは使用していません。🖥️ オンデバイスモードで使用するChrome内蔵音声認識エンジン（Web Speech API）はブラウザ自体に組み込まれた機能であり、外部からダウンロードされるコードではありません。</p>
 
 <h2>8. データの削除</h2>
 <p>ユーザーはいつでも以下の方法でデータを削除できます。</p>
@@ -152,7 +157,7 @@
 </ul>
 
 <h2>9. Chrome Web Store Limited Use Policy への準拠</h2>
-<p>本拡張機能は、Chrome Web Store User Data Policyおよび Limited Use Requirements に準拠しています。取得したユーザーデータは、本拡張機能の単一の目的（ライブ文字起こしおよびファイル文字起こし）を提供・改善するためにのみ使用されます。ユーザーデータを広告目的で使用すること、第三者に販売すること、信用力の判定に使用することはありません。Google OAuth 2.0を通じて取得したデータ（認証トークン、メールアドレス）についても同様に、本拡張機能の機能提供にのみ使用されます。</p>
+<p>本拡張機能は、Chrome Web Store User Data Policyおよび Limited Use Requirements に準拠しています。取得したユーザーデータは、本拡張機能の単一の目的（☁️ APIモードおよび🖥️ オンデバイスモードによるライブ文字起こし、ならびにファイル文字起こし）を提供・改善するためにのみ使用されます。ユーザーデータを広告目的で使用すること、第三者に販売すること、信用力の判定に使用することはありません。Google OAuth 2.0を通じて取得したデータ（認証トークン、メールアドレス）についても同様に、本拡張機能の機能提供にのみ使用されます。</p>
 
 <h2>10. 子どものプライバシー</h2>
 <p>本拡張機能は13歳未満の子どもを対象としたものではなく、13歳未満の子どもから意図的に個人情報を収集することはありません。</p>
@@ -168,15 +173,15 @@
 
 <div class="lang-section">
 <h1>Privacy Policy — Transcription Tool</h1>
-<p class="updated">Last updated: April 21, 2026</p>
+<p class="updated">Last updated: April 23, 2026</p>
 
 <h2>1. Introduction</h2>
-<p>"Transcription Tool" (hereinafter "this extension") is a Chrome extension that transcribes audio from browser tabs and microphone input live. It also supports transcription of saved audio and video files. It displays transcription results in a side panel and a popup window, and provides text search, copy, export, on-device translation, audio recording/screen recording, and Google Docs integration features. This Privacy Policy explains how this extension handles user data.</p>
+<p>"Transcription Tool" (hereinafter "this extension") is a Chrome extension that transcribes audio from browser tabs and microphone input live. It also supports transcription of saved audio and video files. Two transcription engines are available: ☁️ high-accuracy transcription via the OpenAI API (API mode), and 🖥️ local processing within the browser using Chrome's built-in speech recognition (on-device mode, no API key required). It displays transcription results in a side panel and a popup window, and provides text search, copy, export, on-device translation, audio recording/screen recording, and Google Docs integration features. This Privacy Policy explains how this extension handles user data.</p>
 
 <h2>2. Data We Collect</h2>
 
 <h3>2.1 OpenAI API Key</h3>
-<p>This extension uses an OpenAI API key provided by the user or an administrator to deliver transcription functionality. API keys are obtained and stored through the following methods:</p>
+<p>This extension uses an OpenAI API key provided by the user or an administrator to deliver transcription functionality in ☁️ API mode. In 🖥️ on-device mode, no API key is required and none is obtained or stored. API keys are obtained and stored through the following methods:</p>
 <ul>
   <li><strong>User-entered API keys (sk- format):</strong> Entered by the user in the settings.</li>
   <li><strong>Administrator-distributed app-bound keys (skt- format):</strong> Distributed by administrators via Google Admin Console managed policy.</li>
@@ -190,8 +195,9 @@
   <li>Audio from the browser tab that the user has authorized for sharing (PC audio)</li>
   <li>Microphone audio, if enabled by the user</li>
 </ul>
-<p>For live transcription, audio data is sent directly to the OpenAI Realtime Transcription API via WebSocket Secure (WSS). Audio data is never sent to the extension developer's servers.</p>
-<p>For file transcription, audio and video files selected by the user are decoded and split within the browser, then sent to the OpenAI Whisper API via HTTPS. File data is never sent to the extension developer's servers. The original file is not modified.</p>
+<p><strong>☁️ API mode (live transcription):</strong> Audio data is sent directly to the OpenAI Realtime Transcription API via WebSocket Secure (WSS). Audio data is never sent to the extension developer's servers.</p>
+<p><strong>🖥️ On-device mode:</strong> Audio data is processed locally within the browser by Chrome's built-in speech recognition engine. Audio data is never sent to any external server, including the OpenAI API.</p>
+<p><strong>File transcription:</strong> Audio and video files selected by the user are decoded and split within the browser, then sent to the OpenAI Whisper API via HTTPS. File data is never sent to the extension developer's servers. The original file is not modified.</p>
 <p>Additionally, if the user enables the recording option, the following files (WebM format) are saved locally on the user's device:</p>
 <ul>
   <li><strong>Audio-only mode:</strong> An audio recording file containing PC audio and microphone audio</li>
@@ -201,11 +207,11 @@
 <p>Recording files are automatically downloaded when transcription stops and exist only on the user's device. These files are never transmitted externally.</p>
 
 <h3>2.3 Transcription Results</h3>
-<p>Transcription text returned from the OpenAI API is stored in the browser's local storage (chrome.storage.local). This data exists only on the user's device and is not transmitted externally (except when the user has enabled Google Docs integration; see section 2.7 for details).</p>
+<p>In ☁️ API mode, transcription text returned from the OpenAI API, and in 🖥️ on-device mode, transcription text generated by Chrome's built-in speech recognition engine, are stored in the browser's local storage (chrome.storage.local). This data exists only on the user's device and is not transmitted externally (except when the user has enabled Google Docs integration; see section 2.7 for details).</p>
 
 <h3>2.4 Settings Data</h3>
-<p>User preferences such as language, transcription model, segmentation mode, font size, font family, theme, microphone usage, microphone noise reduction settings, recording mode, and Google Docs integration settings are stored in the browser's local storage.</p>
-<p>The "terminology hints (prompt)" entered by the user are sent to the OpenAI API as part of the session configuration to improve transcription accuracy.</p>
+<p>User preferences such as transcription engine selection, language, transcription model, segmentation mode, font size, font family, theme, microphone usage, microphone noise reduction settings, recording mode, and Google Docs integration settings are stored in the browser's local storage.</p>
+<p>The "terminology hints (prompt)" entered by the user are sent to the OpenAI API as part of the session configuration to improve transcription accuracy in ☁️ API mode. In 🖥️ on-device mode, terminology hints are not used and are not sent externally.</p>
 <p>Temporary state information required for the extension's internal operation (such as microphone tab identifiers and popup window state) is stored in the browser's session storage and is automatically deleted when the browser is closed.</p>
 
 <h3>2.5 Translation Data</h3>
@@ -245,6 +251,7 @@
   <li>Cookies, location data, or financial information</li>
   <li>Anonymous usage statistics or analytics data</li>
   <li>External transmission of text for translation processing (all translation is performed entirely on-device)</li>
+  <li>External transmission of audio data when using 🖥️ on-device mode (all speech recognition is performed entirely within the browser)</li>
   <li>Google account passwords or other authentication credentials (authentication is handled through Google's OAuth 2.0 flow, and this extension does not access passwords)</li>
   <li>Any user data other than the email address in remote API key distribution communications (browsing data, audio data, transcription results, etc.)</li>
 </ul>
@@ -252,12 +259,13 @@
 <h2>4. How We Use Data</h2>
 <p>Collected data is used solely for the following purposes:</p>
 <ul>
-  <li>OpenAI API Key: Authentication for connecting to the OpenAI Realtime Transcription API and the Whisper API</li>
-  <li>Audio Data: Live transcription processing via the OpenAI API, and file transcription processing via the Whisper API</li>
+  <li>OpenAI API Key: Authentication for connecting to the OpenAI Realtime Transcription API and the Whisper API in ☁️ API mode</li>
+  <li>Audio Data (☁️ API mode): Live transcription processing via the OpenAI API, and file transcription processing via the Whisper API</li>
+  <li>Audio Data (🖥️ On-device mode): Local transcription processing within the browser using Chrome's built-in speech recognition engine (no external transmission)</li>
   <li>Recording Files: Local storage of audio recordings or screen recordings when enabled by the user</li>
   <li>Video Data: Recording to screen recording files when the user selects "Audio + Screen" mode (never transmitted externally)</li>
   <li>Transcription Results: Display, search, copy, and export functionality for users, and writing to Google Docs (when enabled)</li>
-  <li>Terminology Hints: Improving transcription accuracy via the OpenAI API</li>
+  <li>Terminology Hints: Improving transcription accuracy via the OpenAI API in ☁️ API mode</li>
   <li>Settings Data: Persisting and restoring user preferences</li>
   <li>Translation Data: On-device translation and display of transcription results, and writing to Google Docs (when enabled)</li>
   <li>Google Account Information: Authenticating requests to the Google Docs API and displaying login status</li>
@@ -266,7 +274,8 @@
 </ul>
 
 <h2>5. Data Sharing and Third-Party Disclosure</h2>
-<p>Audio data (streaming audio during live transcription and audio chunks during file transcription) and user-configured terminology hints are sent directly to OpenAI, Inc.'s API. For information on how OpenAI handles data, please refer to <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI's Privacy Policy</a>.</p>
+<p><strong>☁️ API mode:</strong> Audio data (streaming audio during live transcription and audio chunks during file transcription) and user-configured terminology hints are sent directly to OpenAI, Inc.'s API. For information on how OpenAI handles data, please refer to <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI's Privacy Policy</a>.</p>
+<p><strong>🖥️ On-device mode:</strong> Audio data is processed locally within the browser and is never sent to any external server, including the OpenAI API.</p>
 <p>Video data (the video track from screen recording) is never sent to any external server, including the OpenAI API, and is used solely for local recording on the user's device.</p>
 <p>When Google Docs integration is enabled, transcription result text is sent to Google, LLC (Alphabet Inc.) servers via the Google Docs API. For information on how Google handles data, please refer to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. Only text data is sent to Google; audio data, video data, and recording files are never sent to Google.</p>
 <p>For the remote API key distribution feature, the extension sends HTTP GET requests to Google Apps Script hosting infrastructure (script.google.com). These requests include the Chrome profile email address as a query parameter to enable usage tracking by the organization administrator. The email address is used solely for access log recording in the GAS Web App (a spreadsheet managed by the organization administrator) and is never sent to the extension developer. No other user data is included in these requests. Only an API key string is received from the GAS Web App.</p>
@@ -277,8 +286,9 @@
   <li>The OpenAI API key is encrypted with AES-GCM (256-bit) and stored in the browser's local storage. API keys retrieved via remote distribution are also encrypted and cached in the same manner.</li>
   <li>App-bound keys (skt- format) are decrypted via AES-GCM within the extension; the decrypted API key is used only in memory and is never persistently stored in plaintext.</li>
   <li>Google OAuth authentication tokens are encrypted with AES-GCM (256-bit) and stored in the browser's local storage.</li>
-  <li>Audio data for live transcription is transmitted using WebSocket Secure (WSS) encryption.</li>
+  <li>Audio data for live transcription in ☁️ API mode is transmitted using WebSocket Secure (WSS) encryption.</li>
   <li>Audio data for file transcription is transmitted using HTTPS (TLS) encryption.</li>
+  <li>In 🖥️ on-device mode, audio data is processed locally within the browser and is not transmitted externally.</li>
   <li>Communication with the Google Docs API is encrypted via HTTPS (TLS).</li>
   <li>Communication with the GAS Web App is encrypted via HTTPS (TLS).</li>
   <li>Transcription results and settings are stored only in the browser's local storage and are not transmitted externally (except when Google Docs integration is enabled).</li>
@@ -288,7 +298,7 @@
 </ul>
 
 <h2>7. No Remote Code Execution</h2>
-<p>This extension complies with Manifest V3 and does not download or execute any executable code from external servers. All program logic is contained within the extension package. Only data (API key strings, API response text, etc.) is retrieved from external servers, including the GAS Web App. No eval() or other dynamic code execution mechanisms are used.</p>
+<p>This extension complies with Manifest V3 and does not download or execute any executable code from external servers. All program logic is contained within the extension package. Only data (API key strings, API response text, etc.) is retrieved from external servers, including the GAS Web App. No eval() or other dynamic code execution mechanisms are used. The Chrome built-in speech recognition engine (Web Speech API) used in 🖥️ on-device mode is a feature built into the browser itself and is not code downloaded from external sources.</p>
 
 <h2>8. Data Deletion</h2>
 <p>Users can delete their data at any time through the following methods:</p>
@@ -302,7 +312,7 @@
 </ul>
 
 <h2>9. Compliance with Chrome Web Store Limited Use Policy</h2>
-<p>This extension complies with the Chrome Web Store User Data Policy and Limited Use Requirements. User data obtained is used solely to provide and improve the single purpose of this extension (live transcription and file transcription). User data is not used for advertising purposes, sold to third parties, or used for creditworthiness determinations. Data obtained through Google OAuth 2.0 (authentication tokens, email address) is likewise used solely to provide the functionality of this extension.</p>
+<p>This extension complies with the Chrome Web Store User Data Policy and Limited Use Requirements. User data obtained is used solely to provide and improve the single purpose of this extension (live transcription via ☁️ API mode and 🖥️ on-device mode, and file transcription). User data is not used for advertising purposes, sold to third parties, or used for creditworthiness determinations. Data obtained through Google OAuth 2.0 (authentication tokens, email address) is likewise used solely to provide the functionality of this extension.</p>
 
 <h2>10. Children's Privacy</h2>
 <p>This extension is not intended for children under the age of 13, and we do not knowingly collect personal information from children under 13.</p>
