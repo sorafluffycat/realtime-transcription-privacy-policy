@@ -18,10 +18,10 @@
 
 <div class="lang-section">
 <h1>プライバシーポリシー — 文字起こしツール</h1>
-<p class="updated">最終更新日: 2026年4月23日</p>
+<p class="updated">最終更新日: 2026年7月14日</p>
 
 <h2>1. はじめに</h2>
-<p>「文字起こしツール」（以下「本拡張機能」）は、ブラウザタブの音声およびマイク音声をライブで文字起こしするChrome拡張機能です。また、保存済みの音声・動画ファイルからの文字起こしにも対応しています。文字起こしエンジンは2種類から選択できます。☁️ OpenAIのAPIによる高精度な文字起こし（APIモード）と、🖥️ Chrome内蔵の音声認識によるブラウザ内ローカル処理（オンデバイスモード・APIキー不要）に対応しています。サイドパネルおよびポップアップウィンドウで文字起こし結果を表示し、テキストの検索・コピー・エクスポート、オンデバイス翻訳機能、音声録音・画面録画機能、およびGoogleドキュメントへの自動書き込み機能を提供します。本プライバシーポリシーは、本拡張機能がユーザーのデータをどのように取り扱うかを説明します。</p>
+<p>「文字起こしツール」（以下「本拡張機能」）は、ブラウザタブの音声およびマイク音声をライブで文字起こしするChrome拡張機能です。また、保存済みの音声・動画ファイルからの文字起こしにも対応しています。文字起こしエンジンは2種類から選択できます。☁️ OpenAIのAPIによる高精度な文字起こし（APIモード）と、🖥️ Chrome内蔵の音声認識によるブラウザ内ローカル処理（オンデバイスモード・APIキー不要）に対応しています。サイドパネルおよびポップアップウィンドウで文字起こし結果を表示し、テキストの検索・コピー・エクスポート、オンデバイス翻訳機能、音声録音・画面録画機能、Googleドキュメントへの自動書き込み機能、および処理中の自動スリープ抑止機能を提供します。本プライバシーポリシーは、本拡張機能がユーザーのデータをどのように取り扱うかを説明します。</p>
 
 <h2>2. 収集するデータ</h2>
 
@@ -87,6 +87,11 @@
 </ul>
 <p>この機能により、組織内のユーザーは個別にAPIキーを入力する必要がなくなります。ユーザーが設定画面で直接APIキーを入力した場合、そのキーがリモート配信のキーよりも優先して使用されます。</p>
 
+<h3>2.9 自動スリープ抑止</h3>
+<p>本拡張機能は、ライブ文字起こし、録音、録画、ファイル文字起こしなど、ユーザーが明示的に開始した処理の実行中にPCが自動スリープして処理が中断されることを防ぐため、Chromeのpower APIを使用します。</p>
+<p>この機能は、ユーザーの端末の自動スリープを一時的に抑止するためだけに使用されます。power APIの使用により、個人情報、閲覧履歴、音声データ、映像データ、文字起こし結果、ファイル内容などが収集・保存・外部送信されることはありません。</p>
+<p>スリープ抑止は処理の実行中のみ有効になり、処理の停止時、サイドパネルの終了時、または拡張機能の処理が終了した時点で解除されます。画面を常時点灯させる目的ではなく、ユーザーが開始した文字起こし、録音、録画処理を安全に完了させるために使用されます。</p>
+
 <h2>3. 収集しないデータ</h2>
 <p>本拡張機能は以下のデータを一切収集しません。</p>
 <ul>
@@ -99,6 +104,7 @@
   <li>🖥️ オンデバイスモード使用時の音声データの外部送信（音声認識はすべてブラウザ内で完結します）</li>
   <li>Googleアカウントのパスワードやその他の認証情報（認証はGoogleのOAuth 2.0フローで処理され、本拡張機能はパスワードにアクセスしません）</li>
   <li>リモートAPIキー配信の通信において、メールアドレス以外のユーザーデータ（閲覧データ、音声データ、文字起こし結果など）</li>
+  <li>自動スリープ抑止機能に伴う個人情報、閲覧履歴、音声データ、映像データ、文字起こし結果、ファイル内容などの収集</li>
 </ul>
 
 <h2>4. データの使用目的</h2>
@@ -116,6 +122,7 @@
   <li>Googleアカウント情報: Google Docs APIへのリクエスト認証およびログイン状態の表示</li>
   <li>Googleドキュメント連携: 文字起こし結果テキストのGoogleドキュメントへのライブ書き込み</li>
   <li>リモートAPIキー配信: 組織管理者が配布するAPIキーの自動取得・キャッシュ（ユーザーの個別入力を不要にするため）、およびChromeプロファイルのメールアドレスを利用状況把握のためにGAS Webアプリに送信</li>
+  <li>自動スリープ抑止: ユーザーが開始したライブ文字起こし、録音、録画、ファイル文字起こし処理がPCの自動スリープにより中断されることを防ぐため</li>
 </ul>
 
 <h2>5. データの共有・第三者への提供</h2>
@@ -124,6 +131,7 @@
 <p>映像データ（画面録画の映像トラック）はOpenAI APIを含む外部サーバーには送信されず、ユーザーの端末内でのローカル録画にのみ使用されます。</p>
 <p>Googleドキュメント連携を有効にした場合、文字起こし結果のテキストがGoogle Docs APIを通じてGoogle, LLC（Alphabet Inc.）のサーバーに送信されます。Googleによるデータの取り扱いについては、<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleのプライバシーポリシー</a>をご確認ください。Googleに送信されるのはテキストデータのみであり、音声データ、映像データ、録音・録画ファイルがGoogleに送信されることはありません。</p>
 <p>リモートAPIキー配信機能において、拡張機能はGoogle Apps Scriptのホスティング基盤（script.google.com）にHTTP GETリクエストを送信します。このリクエストには、組織管理者が利用状況を把握するためにChromeプロファイルのメールアドレスがクエリパラメータとして含まれます。メールアドレスはGAS Webアプリ（組織管理者が管理するスプレッドシート）でのアクセスログ記録にのみ使用され、本拡張機能の開発者には送信されません。メールアドレス以外のユーザーデータは一切含まれません。GAS Webアプリから受信するのはAPIキー文字列のみです。</p>
+<p>自動スリープ抑止機能は、Chromeのpower APIを用いてユーザー端末の電源管理状態を一時的に制御するのみであり、この機能によってユーザーデータが外部に送信されることはありません。</p>
 <p>上記を除き、本拡張機能の開発者はユーザーのデータを第三者に共有、販売、転送することは一切ありません。</p>
 
 <h2>6. データの保存とセキュリティ</h2>
@@ -139,6 +147,7 @@
   <li>文字起こし結果および設定データはブラウザのローカルストレージにのみ保存され、外部送信されません（Googleドキュメント連携が有効な場合を除く）。</li>
   <li>録音・録画ファイルはユーザーの端末にのみ保存され、外部に送信されません。</li>
   <li>映像データは録画ファイル内にのみ含まれ、外部に送信されません。</li>
+  <li>自動スリープ抑止機能はデータを保存せず、処理中のみ一時的に有効化され、処理終了時に解除されます。</li>
   <li>すべてのデータはユーザーの端末内にのみ存在します（Googleドキュメントに書き込まれたテキストを除く）。</li>
 </ul>
 
@@ -173,10 +182,10 @@
 
 <div class="lang-section">
 <h1>Privacy Policy — Transcription Tool</h1>
-<p class="updated">Last updated: April 23, 2026</p>
+<p class="updated">Last updated: July 14, 2026</p>
 
 <h2>1. Introduction</h2>
-<p>"Transcription Tool" (hereinafter "this extension") is a Chrome extension that transcribes audio from browser tabs and microphone input live. It also supports transcription of saved audio and video files. Two transcription engines are available: ☁️ high-accuracy transcription via the OpenAI API (API mode), and 🖥️ local processing within the browser using Chrome's built-in speech recognition (on-device mode, no API key required). It displays transcription results in a side panel and a popup window, and provides text search, copy, export, on-device translation, audio recording/screen recording, and Google Docs integration features. This Privacy Policy explains how this extension handles user data.</p>
+<p>"Transcription Tool" (hereinafter "this extension") is a Chrome extension that transcribes audio from browser tabs and microphone input live. It also supports transcription of saved audio and video files. Two transcription engines are available: ☁️ high-accuracy transcription via the OpenAI API (API mode), and 🖥️ local processing within the browser using Chrome's built-in speech recognition (on-device mode, no API key required). It displays transcription results in a side panel and a popup window, and provides text search, copy, export, on-device translation, audio recording/screen recording, Google Docs integration, and temporary sleep-prevention functionality during active processing. This Privacy Policy explains how this extension handles user data.</p>
 
 <h2>2. Data We Collect</h2>
 
@@ -242,6 +251,11 @@
 </ul>
 <p>This feature allows users within the organization to use the extension without individually entering an API key. If the user enters an API key directly in the settings, that key takes priority over the remotely distributed key.</p>
 
+<h3>2.9 Power Management</h3>
+<p>This extension uses Chrome's power API to prevent the computer from automatically sleeping while user-initiated tasks are running, such as live transcription, audio recording, screen recording, or file transcription.</p>
+<p>This feature is used only to temporarily prevent automatic system sleep on the user's device. The use of the power API does not collect, store, or transmit any personal information, browsing history, audio data, video data, transcription results, file contents, or other user data.</p>
+<p>Sleep prevention is enabled only while the relevant task is running, and is released when the task stops, when the side panel is closed, or when the extension's processing ends. It is not used to keep the display permanently on; it is used only to help user-initiated transcription and recording tasks complete reliably.</p>
+
 <h2>3. Data We Do Not Collect</h2>
 <p>This extension does not collect any of the following:</p>
 <ul>
@@ -254,6 +268,7 @@
   <li>External transmission of audio data when using 🖥️ on-device mode (all speech recognition is performed entirely within the browser)</li>
   <li>Google account passwords or other authentication credentials (authentication is handled through Google's OAuth 2.0 flow, and this extension does not access passwords)</li>
   <li>Any user data other than the email address in remote API key distribution communications (browsing data, audio data, transcription results, etc.)</li>
+  <li>Any personal information, browsing history, audio data, video data, transcription results, or file contents through the sleep-prevention feature</li>
 </ul>
 
 <h2>4. How We Use Data</h2>
@@ -271,6 +286,7 @@
   <li>Google Account Information: Authenticating requests to the Google Docs API and displaying login status</li>
   <li>Google Docs Integration: Live writing of transcription result text to Google Docs</li>
   <li>Remote API Key Distribution: Automatic retrieval and caching of API keys distributed by the organization administrator (to eliminate the need for individual user input), and sending the Chrome profile email address to the GAS Web App for usage tracking by the organization administrator</li>
+  <li>Power Management: Preventing user-initiated live transcription, recording, screen recording, or file transcription tasks from being interrupted by automatic system sleep</li>
 </ul>
 
 <h2>5. Data Sharing and Third-Party Disclosure</h2>
@@ -279,6 +295,7 @@
 <p>Video data (the video track from screen recording) is never sent to any external server, including the OpenAI API, and is used solely for local recording on the user's device.</p>
 <p>When Google Docs integration is enabled, transcription result text is sent to Google, LLC (Alphabet Inc.) servers via the Google Docs API. For information on how Google handles data, please refer to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. Only text data is sent to Google; audio data, video data, and recording files are never sent to Google.</p>
 <p>For the remote API key distribution feature, the extension sends HTTP GET requests to Google Apps Script hosting infrastructure (script.google.com). These requests include the Chrome profile email address as a query parameter to enable usage tracking by the organization administrator. The email address is used solely for access log recording in the GAS Web App (a spreadsheet managed by the organization administrator) and is never sent to the extension developer. No other user data is included in these requests. Only an API key string is received from the GAS Web App.</p>
+<p>The sleep-prevention feature only temporarily controls the power management state of the user's device through Chrome's power API. No user data is transmitted externally through this feature.</p>
 <p>Other than the above, the extension developer does not share, sell, or transfer user data to any third parties.</p>
 
 <h2>6. Data Storage and Security</h2>
@@ -294,6 +311,7 @@
   <li>Transcription results and settings are stored only in the browser's local storage and are not transmitted externally (except when Google Docs integration is enabled).</li>
   <li>Recording files (audio recordings and screen recordings) are stored only on the user's device and are never transmitted externally.</li>
   <li>Video data is contained only within recording files and is never transmitted externally.</li>
+  <li>The sleep-prevention feature does not store data; it is enabled temporarily only while processing is active and is released when processing ends.</li>
   <li>All data resides solely on the user's device (except for text written to Google Docs).</li>
 </ul>
 
